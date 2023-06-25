@@ -1,0 +1,38 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+class Solution {
+    public List<String> find_permutation(String S) {
+        List<String> result = new ArrayList<>();
+        char[] chars = S.toCharArray();
+        permute(chars, 0, result);
+        Collections.sort(result); // Sort the permutations lexicographically
+        return result;
+    }
+
+    private void permute(char[] chars, int start, List<String> result) {
+        if (start == chars.length - 1) {
+            result.add(String.valueOf(chars)); // Add the permutation to the result list
+        } else {
+            Set<Character> swapped = new HashSet<>();
+            for (int i = start; i < chars.length; i++) {
+                if (swapped.contains(chars[i])) {
+                    continue; // Skip swapping if the character has already been swapped at the current position
+                }
+                swapped.add(chars[i]);
+                swap(chars, start, i); // Swap characters
+                permute(chars, start + 1, result); // Recursively generate permutations for the remaining characters
+                swap(chars, start, i); // Backtrack by swapping the characters back
+            }
+        }
+    }
+
+    private void swap(char[] chars, int i, int j) {
+        char temp = chars[i];
+        chars[i] = chars[j];
+        chars[j] = temp;
+    }
+}
