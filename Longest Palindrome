@@ -1,0 +1,31 @@
+
+
+class Solution {
+    static String longestPalin(String s) {
+        int n = s.length();
+        int maxlength = 0;
+        String ans = "";
+        int[][] dp = new int[n][n];
+
+        for (int diff = 0; diff < n; diff++) {
+            for (int i = 0, j = i + diff; j < n; i++, j++) {
+                if (i == j)                 
+                    dp[i][j] = 1;       //since,single character is always palindrome
+                else if (diff == 1)     //if we have only 2 characters
+                    dp[i][j] = (s.charAt(i) == s.charAt(j)) ? 2 : 0;       //is they are equal,we return there length i.e 2 else 0
+                else {         // for more than 2 characters 
+                    if (s.charAt(i) == s.charAt(j) && dp[i + 1][j - 1] != 0)      //1st and last character must be equal and inner diagnol must not be zero
+                        dp[i][j] = dp[i + 1][j - 1] + 2;     //then,  inner diagnol + length of 1st and last character i.e 2
+                }
+
+                if (dp[i][j] != 0) {       // if our string is palindrome  // in that case only dp value not zero    
+                    if (j - i + 1 > maxlength) {    our palindrome length is j-i+1  //ex: aba is a palind of length 3 i.e i=0,j=2 len=j-i+1 i.e len=2-0+1
+                        maxlength = j - i + 1;
+                        ans = s.substring(i, i + maxlength);  
+                    }
+                }
+            }
+        }
+        return ans;   // we return longest str
+    }
+}
