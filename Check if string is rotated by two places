@@ -1,0 +1,25 @@
+// time complexity is o(n)
+
+
+class Solution {
+    public static boolean isRotated(String str1, String str2) {
+        // Check if the lengths of str1 and str2 are different
+        if (str1.length() != str2.length()) {
+            return false; // Return false if lengths are different
+        }
+
+        // Check if str1 and str2 are both single characters
+        if (str1.length() == 1) {
+            return str1.equals(str2); // Compare the single characters and return the result
+        }
+
+        // Clockwise rotation: take the substring starting from index 2 and append the substring from index 0 to 1
+        String clockRotated = str1.substring(2) + str1.substring(0, 2);
+
+        // Anti-clockwise rotation: take the substring starting from the second last index to the end and append the substring from index 0 to second last index
+        String antiClockRotated = str1.substring(str1.length() - 2) + str1.substring(0, str1.length() - 2);
+
+        // Check if str2 matches either the clockRotated string or the antiClockRotated string
+        return str2.equals(clockRotated) || str2.equals(antiClockRotated);
+    }
+}
