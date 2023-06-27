@@ -1,0 +1,38 @@
+//time complexity is  o(n)
+
+
+class Solution{
+    String rremove(String s) {
+        // code here
+        
+        StringBuilder sb=new StringBuilder();   //provides a mutable buffer to efficiently build strings by appending characters without creating new objects. 
+        int n=s.length();
+        
+        int i=0;
+        while(i<n) {
+            if(i<n-1 && s.charAt(i)==s.charAt(i+1)) {           
+                while(i<n-1 && s.charAt(i)==s.charAt(i+1)) {  // this while loop is to skip the duplicate characters
+                    i++;               
+                }
+                i++;  // this must to skip the last duplicate od adjacent chars
+            }
+           
+            else {                     //if the adjacent chars are not duplicates
+                sb.append(s.charAt(i));         // add that char to sb
+                i++;         // increment for next char
+            }
+            
+            
+          
+        }
+        String result=sb.toString();     //converting string buldr to string
+            
+        
+        if(result.length()<n) {     //to remove adjacdnt characters recursively if any 
+            return rremove(result);
+        }
+        
+        return result;            //final string without adjacent duplicates
+        
+    }
+}
