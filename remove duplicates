@@ -1,0 +1,26 @@
+//tc is o(n)
+
+class Solution {
+    String removeDups(String S) {
+        // code here
+        String result="";       
+        StringBuilder sb=new StringBuilder();
+        HashSet<Character> set=new HashSet<>();//to keep track of characters that have already been encountered.
+        
+        
+        for(int i=0;i<S.length();i++) {
+            char c=S.charAt(i) ;      //storing a character in c
+            if(set.contains(c)) {     //checking if present character in set
+                continue;          //if it is then skipping current iteration
+            }
+            else {
+                sb.append(c);            //else we append that character to final result
+                set.add(c);            //and adding that character to set,as it already encountered
+            }
+            result=sb.toString();      //converting sb to string
+        }
+        
+        return result;
+        
+    }
+}
