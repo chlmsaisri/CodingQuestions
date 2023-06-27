@@ -1,0 +1,34 @@
+//time complexity is O(n)
+
+
+
+class Solution {
+    // Finds decimal value of a given roman numeral
+    public int romanToDecimal(String str) {
+        // code here
+        
+        HashMap<Character,Integer>  hm=new HashMap<>(); // storing the given data in hashmap
+        
+        hm.put('I',1);
+        hm.put('V',5);
+        hm.put('X',10);
+        hm.put('L',50);
+        hm.put('C',100);
+        hm.put('D',500);
+        hm.put('M',1000);
+        
+        int value=0;   
+        
+        for(int i=0;i<str.length();i++) {    //executes till last character of string
+            if(i<str.length()-1 && hm.get(str.charAt(i))<hm.get(str.charAt(i+1))) {    //1st condition necessary to avoid outofbounds exception   coz of i+1 in second condition
+               //we comparing valuesod adjacent characters,if 1st value low and second high we subtract 1st char value
+                value -= hm.get(str.charAt(i));
+            }
+            else {      //else we add the 1st char value
+                value += hm.get(str.charAt(i));
+            }
+        }
+        
+        return value;
+    }
+}
