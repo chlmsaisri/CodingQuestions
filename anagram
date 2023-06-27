@@ -1,0 +1,45 @@
+//time complexity is o(n) 
+
+class Solution
+{    
+    //Function is to check whether two strings are anagram of each other or not.
+    public static boolean isAnagram(String a,String b)
+    {
+        
+        // Your code here
+        
+        
+        if(a.length() != b.length()) {   //if lengths of 2 str diff then ,they r not anagrams
+            return false;
+        }
+        
+        int[] count=new int[26]; //creating count array of size 26
+        
+        for(int i=0;i<a.length();i++) 
+        {
+            count[a.charAt(i)-'a']++;   //inc count of countarray with chars count of string a
+            count[b.charAt(i)-'a']--;   //dec count of countarray with chars count of string b
+        }
+        
+        for(int i=0;i<count.length;i++) {
+            if(count[i] !=0 ){
+            return false;
+        }
+        }
+        
+        return true;
+    }
+}
+
+
+// we can change line 50 to 56 like this ,if input strings are combination of upper and lowercase
+/*
+
+int[] count = new int[256]; 
+
+        for (int i = 0; i < a.length(); i++) {
+            count[a.charAt(i)]++;
+            count[b.charAt(i)]--;
+        }
+        
+*/
